@@ -13,14 +13,14 @@ public class ButtonPane extends GridPane
 		alphabet = new Button[26];
 		
 		char letter = 'A';
-		for (int i = 0; i < 26; i++)
+		for (int i = 0; i < alphabet.length; i++)
 		{
 			alphabet[i] = new Button("" + letter);
 			alphabet[i].setMinSize(30, 30);
 			letter++;
 		}
 		
-		for (int i = 0; i < 26; i++)
+		for (int i = 0; i < alphabet.length; i++)
 		{
 			if (i < 10)
 			{
@@ -39,5 +39,18 @@ public class ButtonPane extends GridPane
 		setAlignment(Pos.CENTER);
 		setPrefHeight(150);
 		setPrefWidth(400);
+	}
+	
+	public Button[] getAlphabet()
+	{
+		return alphabet;
+	}
+	
+	public void resetButtons()
+	{
+		for (int i = 0; i < alphabet.length; i++)
+		{
+			alphabet[i].setVisible(true);
+		}
 	}
 }
