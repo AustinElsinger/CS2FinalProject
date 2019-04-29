@@ -14,15 +14,6 @@ public class PersonPane extends Pane
 	private Line torso;
 	private Line leftLeg;
 	private Line rightLeg;
-	private Group person;
-	
-	private Line rope;
-	private Line horizontalBeam;
-	private Line verticalBeam;
-	private Line leftSupport;
-	private Line rightSupport;
-	private Line base;
-	private Group gallow;
 	
 	public PersonPane()
 	{
@@ -30,60 +21,76 @@ public class PersonPane extends Pane
 		head.setFill(null);
     	head.setStroke(Color.BLACK);
     	head.setStrokeWidth(5);
+    	head.setVisible(false);
 		leftArm = new Line(150, 200, 200, 150);
 		leftArm.setStrokeWidth(5);
+		leftArm.setVisible(false);
 		rightArm = new Line(250, 200, 200, 150);
 		rightArm.setStrokeWidth(5);
+		rightArm.setVisible(false);
 		torso = new Line(200, 225, 200, 150);
 		torso.setStrokeWidth(5);
+		torso.setVisible(false);
 		leftLeg = new Line(150, 300, 200, 225);
 		leftLeg.setStrokeWidth(5);
+		leftLeg.setVisible(false);
 		rightLeg = new Line(250, 300, 200, 225);
 		rightLeg.setStrokeWidth(5);
-		person = new Group(head, leftArm, rightArm, torso, leftLeg, rightLeg);
+		rightLeg.setVisible(false);
+		Group person = new Group(head, leftArm, rightArm, torso, leftLeg, rightLeg);
 		
-		rope = new Line(200, 100, 200, 50);
-		horizontalBeam = new Line(200, 50, 325, 50);
-		verticalBeam = new Line(325, 50, 325, 350);
-		leftSupport = new Line(325, 300, 275, 350);
-		rightSupport = new Line(325, 300, 375, 350);
-		base = new Line(275, 350, 375, 350);
-		gallow = new Group(base, verticalBeam, horizontalBeam, leftSupport, rightSupport, rope);
+		Line rope = new Line(200, 100, 200, 50);
+		Line horizontalBeam = new Line(200, 50, 325, 50);
+		Line verticalBeam = new Line(325, 50, 325, 350);
+		Line leftSupport = new Line(325, 300, 275, 350);
+		Line rightSupport = new Line(325, 300, 375, 350);
+		Line base = new Line(275, 350, 375, 350);
+		Group gallows = new Group(base, verticalBeam, horizontalBeam, leftSupport, rightSupport, rope);
 		
 		getChildren().add(person);
-		getChildren().add(gallow);
+		getChildren().add(gallows);
 		
 		setPrefHeight(400);
 		setPrefWidth(400);
 	}
 	
-	public void setHeadVisible(boolean bool)
+	public boolean setBodyPartVisible()
 	{
-		head.setVisible(bool);
+		if (head.isVisible() == false)
+		{
+			head.setVisible(true);
+		}
+		else if (leftArm.isVisible() == false)
+		{
+			leftArm.setVisible(true);
+		}
+		else if (rightArm.isVisible() == false)
+		{
+			rightArm.setVisible(true);
+		}
+		else if (torso.isVisible() == false)
+		{
+			torso.setVisible(true);
+		}
+		else if (leftLeg.isVisible() == false)
+		{
+			leftLeg.setVisible(true);
+		}
+		else if (rightLeg.isVisible() == false)
+		{
+			rightLeg.setVisible(true);
+			return false;
+		}
+		return true;
 	}
 	
-	public void setLeftArmVisible(boolean bool)
+	public void resetBodyParts()
 	{
-		leftArm.setVisible(bool);
-	}
-	
-	public void setRightArmVisible(boolean bool)
-	{
-		rightArm.setVisible(bool);
-	}
-	
-	public void setTorsoVisible(boolean bool)
-	{
-		torso.setVisible(bool);
-	}
-	
-	public void setLeftLegVisible(boolean bool)
-	{
-		leftLeg.setVisible(bool);
-	}
-	
-	public void setRightLegVisible(boolean bool)
-	{
-		rightLeg.setVisible(bool);
+		head.setVisible(false);
+		leftArm.setVisible(false);
+		rightArm.setVisible(false);
+		torso.setVisible(false);
+		leftLeg.setVisible(false);
+		rightLeg.setVisible(false);
 	}
 }
