@@ -54,7 +54,7 @@ public class PersonPane extends Pane
 		setPrefWidth(400);
 	}
 	
-	public boolean setBodyPartVisible()
+	public void setBodyPartVisible()
 	{
 		if (head.isVisible() == false)
 		{
@@ -79,12 +79,19 @@ public class PersonPane extends Pane
 		else if (rightLeg.isVisible() == false)
 		{
 			rightLeg.setVisible(true);
-			return false;
 		}
-		return true;
 	}
 	
-	public void resetBodyParts()
+	public boolean isGameOver()
+	{
+		if (rightLeg.isVisible() == true)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public void reset()
 	{
 		head.setVisible(false);
 		leftArm.setVisible(false);
