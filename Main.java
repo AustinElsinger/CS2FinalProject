@@ -2,7 +2,6 @@ package application;
 	
 import java.util.ArrayList;
 import java.util.Random;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -36,11 +35,14 @@ public class Main extends Application
 		wordPane = new WordPane(letters);
 		buttonPane = new ButtonPane();
 		
-		Button alphabet[] = buttonPane.getAlphabet();
+		Button alphabet[] = buttonPane.getAlphabetButtons();
 		for (int i = 0; i < alphabet.length; i++)
 		{
 			alphabet[i].setOnAction(this::processButtonPress);
 		}
+		
+		Button reset = buttonPane.getResetButton();
+		reset.setOnAction(this::processResetButton);
 		
 		BorderPane borderPane = new BorderPane();
 		borderPane.setTop(personPane);
@@ -60,10 +62,40 @@ public class Main extends Application
 		if (wordPane.checkLetter(letter) == false)
 		{
 			personPane.setBodyPartVisible();
+			if (personPane.isGameOver() == true)
+			{
+				gameOver();
+			}
+		}
+		else if (wordPane.isGameOver() == true)
+		{
+			gameOver();
 		}
 	}
 	
-	public static void main(String[] args) {
+	public void gameOver()
+	{
+		wordPane.gameOver();
+		buttonPane.gameOver();
+	}
+	
+	public void processResetButton(ActionEvent event)
+	{
+		personPane.reset();
+		Random random = new Random();
+		word = WORD_BANK[random.nextInt(WORD_BANK.length)];
+		
+		letters = new ArrayList<String>();
+		for (int i = 0; i < word.length(); i++)
+		{
+			letters.add("" + word.charAt(i));
+		}
+		wordPane.reset(letters);
+		buttonPane.reset();
+	}
+	
+	public static void main(String[] args)
+	{
 		launch(args);
 	}
 }
