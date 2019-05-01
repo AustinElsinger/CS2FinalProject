@@ -3,54 +3,78 @@ package application;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class ButtonPane extends GridPane
 {	
-	private Button[] alphabet;
+	private Button[] alphabetButtons;
+	private Button resetButton;
 	
 	public ButtonPane()
 	{
-		alphabet = new Button[26];
+		alphabetButtons = new Button[26];
 		
 		char letter = 'A';
-		for (int i = 0; i < alphabet.length; i++)
+		for (int i = 0; i < alphabetButtons.length; i++)
 		{
-			alphabet[i] = new Button("" + letter);
-			alphabet[i].setMinSize(30, 30);
+			alphabetButtons[i] = new Button("" + letter);
+			alphabetButtons[i].setMinSize(30, 30);
 			letter++;
 		}
 		
-		for (int i = 0; i < alphabet.length; i++)
+		for (int i = 0; i < alphabetButtons.length; i++)
 		{
 			if (i < 10)
 			{
-				add(alphabet[i], i, 0);
+				add(alphabetButtons[i], i, 0);
 			}
 			else if (i > 9 && i < 20)
 			{
-				add(alphabet[i], i - 10, 1);
+				add(alphabetButtons[i], i - 10, 1);
 			}
 			else
 			{
-				add(alphabet[i], i - 18, 2);
+				add(alphabetButtons[i], i - 18, 2);
 			}
 		}
 		
+		Pane whiteSpace = new Pane();
+		whiteSpace.setMinHeight(30);
+		add(whiteSpace, 0, 3);
+		
+		resetButton = new Button("Reset");
+		resetButton.setMinSize(60, 30);
+		add(resetButton, 4, 4, 2, 1);
+		
 		setAlignment(Pos.CENTER);
-		setPrefHeight(150);
+		setPrefHeight(200);
 		setPrefWidth(400);
 	}
 	
-	public Button[] getAlphabet()
+	public Button[] getAlphabetButtons()
 	{
-		return alphabet;
+		return alphabetButtons;
 	}
 	
-	public void resetButtons()
+	public Button getResetButton()
 	{
-		for (int i = 0; i < alphabet.length; i++)
+		return resetButton;
+	}
+	
+	public void gameOver()
+	{
+		for (int i = 0; i < alphabetButtons.length; i++)
 		{
-			alphabet[i].setVisible(true);
+			alphabetButtons[i].setDisable(true);
+		}
+	}
+	
+	public void reset()
+	{
+		for (int i = 0; i < alphabetButtons.length; i++)
+		{
+			alphabetButtons[i].setVisible(true);
+			alphabetButtons[i].setDisable(false);
 		}
 	}
 }
