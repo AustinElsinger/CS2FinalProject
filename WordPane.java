@@ -1,7 +1,6 @@
 package application;
 
 import java.util.ArrayList;
-
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -47,7 +46,32 @@ public class WordPane extends GridPane
 		return isContained;
 	}
 	
-	public void resetWord(ArrayList<String> newLetters)
+	public boolean isGameOver()
+	{
+		boolean wordCompleted = true;
+		for (Label element : letters)
+		{
+			if (element.isVisible() == false)
+			{
+				wordCompleted = false;
+			}
+		}
+		return wordCompleted;
+	}
+	
+	public void gameOver()
+	{
+		for (Label element : letters)
+		{
+			if (element.isVisible() == false)
+			{
+				element.setVisible(true);
+				element.setStyle("-fx-text-fill: red;");
+			}
+		}
+	}
+	
+	public void reset(ArrayList<String> newLetters)
 	{
 		getChildren().removeAll(letters);
 		letters.clear();
